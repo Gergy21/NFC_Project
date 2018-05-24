@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mehdi.myapplication">
-    <uses-permission android:name="android.permission.NFC"/>
 
+    <uses-permission
+        android:name="android.permission.NFC" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:name="android.hardware.NFC"
-        android:required="true"/>
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -15,16 +18,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.nfc.action.NDEF DISCOVERED" />
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="text/plain"/>
-                <data android:mimeType="application/[package name]"/>
 
+        <activity android:name=".MainActivity"
+
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+           <!-- <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT" />
+
+            </intent-filter>
+            <meta-data android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_list" /> -->
+
         </activity>
     </application>
 
+
 </manifest>
+
+
+
+
+
+
