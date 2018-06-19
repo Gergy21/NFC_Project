@@ -1,9 +1,8 @@
 # NFC_Project
 Projet Géolocalisation NFC LPRO Cachan 2018
 
-2ème Version
+4ème Version
 
 
-- Suppression du bouton "Scan"
-- Implémentation des intents NFC
-- Affichage de la flèche lors de la reception d'un intent nfc quelconque
+- Rajout des cas de scan de tags spécifiques
+- Placement des flèches aux endroits clés
