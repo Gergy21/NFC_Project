@@ -3,12 +3,15 @@ package com.example.mehdi.myapplication;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "NFC non activé", Toast.LENGTH_LONG).show();
         }
 
+        final TextView RecupTag = (TextView) findViewById(R.id.datarecup);
         final ImageView UpArrow = (ImageView) findViewById(R.id.fleche);
         UpArrow.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
     }
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
             super.onPause();
         }
+        
 
         //méthode gérant l’action à la suite de la réception d’un intent d’un tag NFC
         @Override
@@ -64,7 +69,19 @@ public class MainActivity extends AppCompatActivity {
             // Permet de notifier la reconnaissance d'un TAG NFC
             Toast.makeText(this, "NFC intent reçu!", Toast.LENGTH_LONG).show();
             final ImageView UpArrow = (ImageView) findViewById(R.id.fleche);
-            UpArrow.setVisibility(View.VISIBLE); // définir notre flèche de manière visible lorsqu'un intent est détecté
+            final TextView RecupTag = (TextView) findViewById(R.id.datarecup);
+
+            Parcelable[] rawMsgs = intent.getParcelableArrayExtra(
+                    NfcAdapter.EXTRA_NDEF_MESSAGES);
+            // only one message sent during the beam
+            NdefMessage msg = (NdefMessage) rawMsgs[0];
+            // record 0 contains the MIME type, record 1 is the AAR, if present
+            RecupTag.setText(new String(msg.getRecords()[0].getPayload()));
+
+            String value = RecupTag.getText().toString(); // récupère via le tag la chaine de charactère affiché dans le EditView
+            if( value.equals("en1"));{ // si notre valeur est égal a "en1" sois notre étiquette 1 :
+               UpArrow.setVisibility(View.VISIBLE); // défini notre flèche de manière visible
+            }
             super.onNewIntent(intent);
 
         }

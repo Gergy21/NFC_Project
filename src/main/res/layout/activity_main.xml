@@ -36,4 +36,16 @@
         app:layout_constraintVertical_bias="0.776"
         app:srcCompat="@drawable/flechebas" />
 
+    <TextView
+        android:id="@+id/datarecup"
+        android:layout_width="96dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
