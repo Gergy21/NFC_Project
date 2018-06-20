@@ -26,7 +26,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
-        // vérifie si l'appareil supporte le NFC et s'il est activé
+        getSupportActionBar().setDisplayShowHomeEnabled(true); // Je souhaite afficher mon logo
+        getSupportActionBar().setIcon(R.drawable.test_icon2); // Je dessine mon logo dans l'action bar
+
+        // Permet de vérifier  si l'appareil supporte le NFC et s'il est activé
+        // Permet également d'alerter l'utilisateur en affichant les résultats dans un Toast
         if (nfcAdapter == null) {
             Toast.makeText(this, "NFC n'est pas disponible :'(", Toast.LENGTH_LONG).show();
         } else if (nfcAdapter.isEnabled()) {
@@ -34,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "NFC non activé", Toast.LENGTH_LONG).show();
         }
-        
+
+        // Récupère l'ID du TextView (info positions) ainsi que de chaque ImagineView (flèches)
         final ImageView UpArrowEntry = (ImageView) findViewById(R.id.flecheEntrée);
         final ImageView UpArrowC1 = (ImageView) findViewById(R.id.flecheC1);
         final ImageView UpArrowC2 = (ImageView) findViewById(R.id.flecheC2);
@@ -50,23 +55,32 @@ public class MainActivity extends AppCompatActivity {
         final ImageView UpArrowH3 = (ImageView) findViewById(R.id.flecheH3);
         final ImageView UpArrowGMP = (ImageView) findViewById(R.id.flecheGMP);
         final ImageView UpArrowAmphi = (ImageView) findViewById(R.id.flecheAmphi);
+        final ImageView UpArrowB1 = (ImageView) findViewById(R.id.flecheB1);
+        final ImageView UpArrowB2 = (ImageView) findViewById(R.id.flecheB2);
+        final ImageView UpArrowA = (ImageView) findViewById(R.id.flecheA);
         final TextView InfoTAG = (TextView) findViewById(R.id.infoPos);
-        UpArrowEntry.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowC1.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowC2.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowC3.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowE1.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowE2.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowE3.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowG1.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowG2.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowG3.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowH1.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowH2.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowH3.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowGMP.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        UpArrowAmphi.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-        InfoTAG.setVisibility(View.INVISIBLE); // définir nos infos de manière invisible
+
+        // Permet de définir la zone de texte des info positions
+        // ainsi que tous nos flèches de manière invisible
+        UpArrowEntry.setVisibility(View.INVISIBLE);
+        UpArrowC1.setVisibility(View.INVISIBLE);
+        UpArrowC2.setVisibility(View.INVISIBLE);
+        UpArrowC3.setVisibility(View.INVISIBLE);
+        UpArrowE1.setVisibility(View.INVISIBLE);
+        UpArrowE2.setVisibility(View.INVISIBLE);
+        UpArrowE3.setVisibility(View.INVISIBLE);
+        UpArrowG1.setVisibility(View.INVISIBLE);
+        UpArrowG2.setVisibility(View.INVISIBLE);
+        UpArrowG3.setVisibility(View.INVISIBLE);
+        UpArrowH1.setVisibility(View.INVISIBLE);
+        UpArrowH2.setVisibility(View.INVISIBLE);
+        UpArrowH3.setVisibility(View.INVISIBLE);
+        UpArrowGMP.setVisibility(View.INVISIBLE);
+        UpArrowAmphi.setVisibility(View.INVISIBLE);
+        UpArrowB1.setVisibility(View.INVISIBLE);
+        UpArrowB2.setVisibility(View.INVISIBLE);
+        UpArrowA.setVisibility(View.INVISIBLE);
+        InfoTAG.setVisibility(View.INVISIBLE);
     }
 
     // création de l’intent et vérification de la disponibilité du "NFC" sur l’appareil pour ensuite
@@ -97,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         // Permet de notifier la reconnaissance d'un TAG NFC
         //Toast.makeText(this, "NFC intent reçu!", Toast.LENGTH_LONG).show();
 
+        // Récupère l'ID du TextView (info positions) ainsi que de chaque ImagineView (flèches)
         final ImageView UpArrowEntry = (ImageView) findViewById(R.id.flecheEntrée);
         final ImageView UpArrowC1 = (ImageView) findViewById(R.id.flecheC1);
         final ImageView UpArrowC2 = (ImageView) findViewById(R.id.flecheC2);
@@ -112,6 +127,9 @@ public class MainActivity extends AppCompatActivity {
         final ImageView UpArrowH3 = (ImageView) findViewById(R.id.flecheH3);
         final ImageView UpArrowGMP = (ImageView) findViewById(R.id.flecheGMP);
         final ImageView UpArrowAmphi = (ImageView) findViewById(R.id.flecheAmphi);
+        final ImageView UpArrowB1 = (ImageView) findViewById(R.id.flecheB1);
+        final ImageView UpArrowB2 = (ImageView) findViewById(R.id.flecheB2);
+        final ImageView UpArrowA = (ImageView) findViewById(R.id.flecheA);
         final TextView InfoTAG = (TextView) findViewById(R.id.infoPos);
         final TextView RecupTag = (TextView) findViewById(R.id.datarecup);
 
@@ -143,24 +161,34 @@ public class MainActivity extends AppCompatActivity {
                 msgtext = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
                 RecupTag.setText(msgtext);
 
-                UpArrowEntry.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowC1.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowC2.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowC3.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowE1.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowE2.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowE3.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowG1.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowG2.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowG3.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowH1.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowH2.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowH3.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowGMP.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                UpArrowAmphi.setVisibility(View.INVISIBLE); // définir notre flèche de manière invisible
-                InfoTAG.setVisibility(View.INVISIBLE); // définir nos infos de manière invisible
-                switch(msgtext){
+                // Permet de définir la zone de texte des info positions
+                // ainsi que tous nos flèches de manière invisible
+                // cela permettra de remettre toute les flèches de manière
+                // invisible à chaque detection d'un nouvel intent
+                UpArrowEntry.setVisibility(View.INVISIBLE);
+                UpArrowC1.setVisibility(View.INVISIBLE);
+                UpArrowC2.setVisibility(View.INVISIBLE);
+                UpArrowC3.setVisibility(View.INVISIBLE);
+                UpArrowE1.setVisibility(View.INVISIBLE);
+                UpArrowE2.setVisibility(View.INVISIBLE);
+                UpArrowE3.setVisibility(View.INVISIBLE);
+                UpArrowG1.setVisibility(View.INVISIBLE);
+                UpArrowG2.setVisibility(View.INVISIBLE);
+                UpArrowG3.setVisibility(View.INVISIBLE);
+                UpArrowH1.setVisibility(View.INVISIBLE);
+                UpArrowH2.setVisibility(View.INVISIBLE);
+                UpArrowH3.setVisibility(View.INVISIBLE);
+                UpArrowGMP.setVisibility(View.INVISIBLE);
+                UpArrowAmphi.setVisibility(View.INVISIBLE);
+                UpArrowB1.setVisibility(View.INVISIBLE);
+                UpArrowB2.setVisibility(View.INVISIBLE);
+                UpArrowA.setVisibility(View.INVISIBLE);
+                InfoTAG.setVisibility(View.INVISIBLE);
 
+                // switch case nous permettant d'afficher une flèche indiquant
+                // la position de l'utilisateur ainsi que des informations liées
+                // à cette position lorsqu'il scan un tag NFC spécifique
+                switch(msgtext){
                     case"1":
                         UpArrowEntry.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
@@ -169,73 +197,89 @@ public class MainActivity extends AppCompatActivity {
                     case "2":
                         UpArrowC1.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Début bâtiment C\n\rEtage : RDC");
+                        InfoTAG.setText("Début du bâtiment C\n\rEtage : RDC");
                         break;
                     case "3":
                         UpArrowC2.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Milieu bâtiment C\n\rEtage : RDC");
+                        InfoTAG.setText("Milieu du bâtiment C\n\rEtage : RDC");
                         break;
                     case"4":
                         UpArrowC3.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Fin bâtiment C\n\rEtage : RDC");
+                        InfoTAG.setText("Fin du\n\rbâtiment C\n\rEtage : RDC");
                         break;
                     case"5":
                         UpArrowGMP.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Bâtiment GMP\n\rEtage : RDC");
+                        InfoTAG.setText("Bâtiment F (GMP)\n\rEtage : RDC");
                         break;
                     case"6":
                         UpArrowE1.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Début bâtiment E\n\rEtage : RDC");
+                        InfoTAG.setText("Début du bâtiment E\n\rEtage : RDC");
                         break;
                     case"7":
                         UpArrowE2.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Milieu bâtiment E\n\rEtage : RDC");
+                        InfoTAG.setText("Milieu du bâtiment E\n\rEtage : RDC");
                         break;
                     case"8":
                         UpArrowE3.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Fin bâtiment E\n\rEtage : RDC");
+                        InfoTAG.setText("Fin du\n\rbâtiment E\n\rEtage : RDC");
                         break;
                     case"9":
                         UpArrowG1.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Début bâtiment G\n\rEtage : RDC");
+                        InfoTAG.setText("Début du bâtiment G (Geii2)\n\rEtage : RDC");
                         break;
                     case"10":
                         UpArrowG2.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Milieu bâtiment G\n\rEtage : RDC");
+                        InfoTAG.setText("Milieu du bâtiment G (Geii2)\n\rEtage : RDC");
                         break;
                     case"11":
                         UpArrowG3.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Fin bâtiment G\n\rEtage : RDC");
+                        InfoTAG.setText("Fin du\n\rbâtiment G (Geii2)\n\rEtage : RDC");
                         break;
                     case"12":
                         UpArrowH1.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Début bâtiment H\n\rEtage : RDC");
+                        InfoTAG.setText("Début du bâtiment H (Geii1)\n\rEtage : RDC");
                         break;
                     case"13":
                         UpArrowH2.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Milieu bâtiment H\n\rEtage : RDC");
+                        InfoTAG.setText("Milieu du bâtiment H (Geii1)\n\rEtage : RDC");
                         break;
                     case"14":
                         UpArrowH3.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Fin bâtiment H\n\rEtage : RDC");
+                        InfoTAG.setText("Fin du bâtiment\n\rH (Geii1)\n\rEtage : RDC");
                         break;
                     case"15":
                         UpArrowAmphi.setVisibility(View.VISIBLE);
                         InfoTAG.setVisibility(View.VISIBLE);
-                        InfoTAG.setText("Bâtiment Amphithéâtre\n\rEtage : RDC");
+                        InfoTAG.setText("Bâtiment D (Amphithéâtre)\n\rEtage : RDC");
                         break;
+                    case"16":
+                        UpArrowB1.setVisibility(View.VISIBLE);
+                        InfoTAG.setVisibility(View.VISIBLE);
+                        InfoTAG.setText("Début du Bâtiment B\n\rEtage : RDC");
+                        break;
+                    case"17":
+                        UpArrowB2.setVisibility(View.VISIBLE);
+                        InfoTAG.setVisibility(View.VISIBLE);
+                        InfoTAG.setText("Fin du Bâtiment B\n\rEtage : RDC");
+                        break;
+                    case"18":
+                        UpArrowA.setVisibility(View.VISIBLE);
+                        InfoTAG.setVisibility(View.VISIBLE);
+                        InfoTAG.setText("Bâtiment A\n\rEtage : RDC");
+                        break;
+
 
                     default:
                         InfoTAG.setVisibility(View.VISIBLE);
