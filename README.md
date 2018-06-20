@@ -1,8 +1,9 @@
 # NFC_Project
 Projet Géolocalisation NFC LPRO Cachan 2018
 
-4ème Version
+## Version Finale
 
-
-- Rajout des cas de scan de tags spécifiques
-- Placement des flèches aux endroits clés
+- Changement du nom de l'application en Géo NFC
+- Implémentation de l'icône à différents formats
+- Ajout d'une fenêtre d'info relative à la position de l'utilisateur
+- Changement du format du bandeau de l'application
